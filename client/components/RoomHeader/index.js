@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { toggleNavigation } from '../../actions';
 import React, { Component } from 'react';
-import './index.scss';
+import './index.css';
 
 class RoomHeader extends Component {
   render() {
@@ -14,7 +14,7 @@ class RoomHeader extends Component {
         <ul className="room-header-bar"
             onClick={() => dispatch(toggleNavigation())}>
           <li className="room-header-bar-item">
-            <i className={navigationCollapsed ? 'iconNav is-hidden' : 'iconNav'}>
+            <i className={`icon iconNav ${ navigationCollapsed ? 'is-hidden' : ''}`}>
               <b className="iconNav-line"></b>
               <b className="iconNav-line"></b>
               <b className="iconNav-line"></b>

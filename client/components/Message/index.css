@@ -1,4 +1,4 @@
-@import '../../scss/common';
+@import '../../styles/_common.css';
 
 .message {
   flex-shrink: 0;
@@ -12,7 +12,7 @@
     margin-bottom: .5rem;
     margin-left: $ava-width;
     padding-left: 1rem;
-    color: color(grey);
+    color: $color-grey;
   }
 
   &-time {
@@ -43,18 +43,18 @@
 
         padding: .5rem;
         background-color: white;
-        border-left: 1px solid color(grey, light);
-        border-bottom: 1px solid color(grey, light);
+        border-left: 1px solid $color-grey-light;
+        border-bottom: 1px solid $color-grey-light;
 
         transform: translate3d(50%, 0, 0) rotate(45deg);
       }
 
       .message--myself & {
-        border-color: color(blue);
+        border-color: $color-blue;
 
         &:before {
-          border-left-color: color(blue);
-          border-bottom-color: color(blue);
+          border-left-color: $color-blue;
+          border-bottom-color: $color-blue;
         }
       }
 
@@ -82,7 +82,7 @@
 
   &--sent {
     .message-time {
-      background-color: color(grey);
+      background-color: $color-grey;
       color: white;
       border-radius: 16px;
     }
@@ -93,7 +93,7 @@
   background-color: white;
   padding: 0 1.5rem .25em;
   border-radius: $radius;
-  border: 1px solid color(grey, light);
+  border: 1px solid $color-grey-light;
 }
 
 .ava {
@@ -101,6 +101,6 @@
   width: $ava-width;
   height: $ava-width;
   border-radius: 999px;
-  background-color: color(grey);
+  background-color: $color-grey;
   background-size: cover;
 }

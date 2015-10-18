@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './index.scss';
+import './index.css';
 
 const WATCH_REGEX = /http:\/\/www.youtube.com\/watch\?v=(.+)/;
 

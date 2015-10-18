@@ -4,7 +4,7 @@ import RoomHeader from '../RoomHeader';
 import MessageList from '../MessageList';
 import Message from '../Message';
 import RoomInput from '../RoomInput';
-import './index.scss';
+import './index.css';
 
 class Room extends Component {
   render() {
