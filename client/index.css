@@ -1,0 +1,8 @@
+@import "normalize-css";
+
+@import "styles/_common.css";
+@import "styles/_resets.css";
+
+@import "styles/_forms.css";
+@import "styles/_icons.css";
+@import "styles/_typography.css";
