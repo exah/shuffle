@@ -9,7 +9,6 @@ console.log('Root folder is', root);
 import postcssImports from 'postcss-import';
 import postcssNested from 'postcss-nested';
 import postcssVariables from 'postcss-advanced-variables';
-import postcssMixins from 'postcss-mixins';
 import postcssCalc from 'postcss-calc';
 import autoprefixer from 'autoprefixer';
 import rucksack from 'rucksack-css';
@@ -37,12 +36,6 @@ export default {
         path.join(root, 'common'),
       ],
     }, {
-      test: /\.scss$/,
-      loader: 'style!' +
-              'css?sourceMap!' +
-              'autoprefixer?{browsers: ["last 2 version", "IE 9"]}!' +
-              'sass?sourceMap&outputStyle=compressed',
-    }, {
       test: /\.css$/,
       loader: 'style!css!postcss',
     }],
@@ -52,7 +45,6 @@ export default {
       glob: true,
     }),
     postcssNested(),
-    postcssMixins(),
     autoprefixer(),
     postcssVariables(),
     postcssCalc(),
@@ -68,7 +60,7 @@ export default {
       path.join(root, 'client'),
       path.join(root, 'common'),
     ],
-    extensions: ['', '.js', '.jsx', '.json', '.scss', '.css'],
+    extensions: ['', '.js', '.jsx', '.json', '.css'],
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

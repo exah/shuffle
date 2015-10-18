@@ -6,6 +6,15 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 const root = __dirname.slice(0, -7);
 console.log('Root folder is', root);
 
+// PostCSS plugins:
+import postcssImports from 'postcss-import';
+import postcssNested from 'postcss-nested';
+import postcssVariables from 'postcss-advanced-variables';
+import postcssCalc from 'postcss-calc';
+import autoprefixer from 'autoprefixer';
+import rucksack from 'rucksack-css';
+import cssnano from 'cssnano';
+
 export default {
   debug: false,
   cache: false,
@@ -26,16 +35,24 @@ export default {
         path.join(root, 'common'),
       ],
     }, {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract(
-        'style-loader',
-        'css-loader!autoprefixer-loader?{browsers: ["last 2 version", "IE 9"]}!' +
-        'sass-loader?outputStyle=compressed'),
+      test: /\.css$/,
+      loader: 'style!css!postcss',
       include: [
         path.join(root, 'client'),
       ],
     }],
   },
+  postcss: () => [
+    postcssImports({
+      glob: true,
+    }),
+    postcssNested(),
+    autoprefixer(),
+    postcssVariables(),
+    postcssCalc(),
+    rucksack(),
+    cssnano(),
+  ],
   resolve: {
     alias: {
       'actions': path.join(root, 'client/actions.js'),
@@ -45,7 +62,7 @@ export default {
       path.join(root, 'client'),
       path.join(root, 'common'),
     ],
-    extensions: ['', '.js', '.jsx', '.json', '.scss', '.css'],
+    extensions: ['', '.js', '.jsx', '.json', '.css'],
   },
   plugins: [
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
