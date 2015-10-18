@@ -41,6 +41,7 @@ if (config.hotReload) {
   fileServer.listen(config.httpPort, () => {
     console.log('FIle and hot reload server listening on *:' + config.httpPort);
   });
+  fileServer.use('/enviroment.js', (req, res) => res.send());
 } else {
   const app = express();
   const httpServer = new http.Server(app);
