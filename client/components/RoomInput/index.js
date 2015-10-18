@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { findDOMNode, Component } from 'react';
+import React, { Component } from 'react';
 import { sendMessage } from '../../smartActions';
 import { roomInputChange, togglePreview } from '../../actions';
 import './index.scss';
@@ -23,7 +23,7 @@ function onClick(e, handler) {
 
 class RoomInput extends Component {
   componentDidUpdate() {
-    const textarea = findDOMNode(this.refs.textarea);
+    const textarea = this.refs.textarea;
     textarea.style.height = '';
     textarea.style.height = `${textarea.scrollHeight}px`;
   }
