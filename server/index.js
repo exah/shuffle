@@ -24,10 +24,10 @@ mongoose.connect(config.dbHost, (err) => {
 if (config.hotReload) {
   // --- DEV HOT RELOAD SERVER
   const webpack = require('webpack');
-  const webpackDevServer = require('webpack-dev-server');
+  const WebpackDevServer = require('webpack-dev-server');
   const webpackDevConfig = require('../config/webpack.dev');
 
-  const fileServer = new webpackDevServer(webpack(webpackDevConfig), {
+  const fileServer = new WebpackDevServer(webpack(webpackDevConfig), {
     publicPath: webpackDevConfig.output.publicPath,
     hot: true,
     historyApiFallback: true,
