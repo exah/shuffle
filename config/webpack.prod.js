@@ -19,7 +19,7 @@ export default {
   debug: false,
   cache: false,
   entry: [
-    './client/main',
+    './client/',
   ],
   output: {
     path: path.join(root, 'build/static'),
@@ -36,21 +36,21 @@ export default {
       ],
     }, {
       test: /\.css$/,
-      loader: 'style!css!postcss',
+      loader: ExtractTextPlugin.extract('style', 'css!postcss'),
       include: [
         path.join(root, 'client'),
       ],
     }],
   },
   postcss: () => [
-    postcssImports({
-      glob: true,
-    }),
+    postcssImports(),
     postcssNested(),
-    autoprefixer(),
     postcssVariables(),
     postcssCalc(),
-    rucksack(),
+    rucksack({
+      fallbacks: true,
+    }),
+    autoprefixer(),
     cssnano(),
   ],
   resolve: {

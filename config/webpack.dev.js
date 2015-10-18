@@ -20,7 +20,7 @@ export default {
   entry: [
     'webpack-dev-server/client',
     'webpack/hot/only-dev-server',
-    './client/main',
+    './client/',
   ],
   output: {
     path: path.join(root, 'build/client'),
@@ -41,14 +41,14 @@ export default {
     }],
   },
   postcss: () => [
-    postcssImports({
-      glob: true,
-    }),
+    postcssImports(),
     postcssNested(),
-    autoprefixer(),
     postcssVariables(),
     postcssCalc(),
-    rucksack(),
+    rucksack({
+      fallbacks: true,
+    }),
+    autoprefixer(),
     cssnano(),
   ],
   resolve: {
