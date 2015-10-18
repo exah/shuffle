@@ -1,4 +1,4 @@
-import 'scss/main.scss';
+import 'index.css';
 import 'babel-core/polyfill';
 
 import React from 'react';

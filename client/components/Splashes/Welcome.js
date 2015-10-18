@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { switchToRoom } from '../../smartActions';
 import { connect } from 'react-redux';
-import './index.scss';
+import './index.css';
 
 class Welcome extends Component {
   render() {
@@ -14,7 +14,7 @@ class Welcome extends Component {
           <p>Join a room and find your new identity.</p>
         </article>
         <article className="article faded">
-          <p><i className="iconShuffle"></i></p>
+          <p><i className="icon iconShuffle"></i></p>
           <p>
             <button
               onClick={() => dispatch(switchToRoom(null))}

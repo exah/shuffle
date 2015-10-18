@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MessageBody from '../MessageBody';
-import './index.scss';
+import './index.css';
 import OpenGraph from '../OpenGraph';
 
 export default class Message extends Component {

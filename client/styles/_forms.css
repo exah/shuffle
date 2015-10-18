@@ -1,27 +1,35 @@
-%reset-input, .reset-input {
-  @include reset-input();
+.reset-input {
+  border: none;
+  outline: none;
+  background: none;
+  color: inherit;
 }
 
 .input {
-	@extend %reset-input;
+  border: none;
+  outline: none;
+  color: inherit;
 
   border-radius: $radius;
-  background-color: color(grey, light);
+  background-color: $color-grey-light;
   padding: .75em 1em .9em;
 
   overflow-y: auto;
   max-height: 50vh;
 
   &--underline {
-    @extend %reset-input;
+    border: none;
+    background: none;
+    outline: none;
+    color: inherit;
 
     padding: .5em 0;
     width: 100%;
 
-    border-bottom: 2px solid rgba(white, .5);
+    border-bottom: 2px solid rgba(#fff, .5);
 
-    @include placeholder {
-      color: rgba(white, .5);
+    &::placeholder {
+      color: rgba(#fff, .5);
     }
   }
 }
@@ -31,10 +39,11 @@ textarea {
 }
 
 .btn {
-	@extend %reset-input;
+	border: none;
+  outline: none;
 
-  background-color: color(blue);
-  color: white;
+  background-color: $color-blue;
+  color: #fff;
   border-radius: $radius;
   padding: .75rem 1.25rem .9rem;
   transition: all .2s;
@@ -42,16 +51,16 @@ textarea {
   display: inline-block;
 
   &:hover {
-    background-color: color(blue, light);
+    background-color: $color-blue-light;
   }
 
   &:disabled, &.is-disabled {
-    background-color: color(grey);
+    background-color: $color-grey;
     cursor: not-allowed;
   }
 
   &.is-off {
-    background-color: color(grey);
+    background-color: $color-grey;
   }
 
   &--outline {
@@ -60,8 +69,8 @@ textarea {
     color: inherit;
 
     &:hover {
-      background-color: color(blue);
-      color: white;
+      background-color: $color-blue;
+      color: #fff;
     }
   }
 }

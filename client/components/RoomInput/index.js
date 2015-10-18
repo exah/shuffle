@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { sendMessage } from '../../smartActions';
 import { roomInputChange, togglePreview } from '../../actions';
-import './index.scss';
+import './index.css';
 
 function onKeyPress(e, handler) {
   if (e.which === 13 && !e.shiftKey) {

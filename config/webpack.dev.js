@@ -5,6 +5,15 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 const root = __dirname.slice(0, -7);
 console.log('Root folder is', root);
 
+// PostCSS plugins:
+import postcssImports from 'postcss-import';
+import postcssNested from 'postcss-nested';
+import postcssVariables from 'postcss-advanced-variables';
+import postcssCalc from 'postcss-calc';
+import autoprefixer from 'autoprefixer';
+import rucksack from 'rucksack-css';
+import cssnano from 'cssnano';
+
 export default {
   debug: true,
   devtool: 'eval',
@@ -27,13 +36,21 @@ export default {
         path.join(root, 'common'),
       ],
     }, {
-      test: /\.scss$/,
-      loader: 'style!' +
-              'css?sourceMap!' +
-              'autoprefixer?{browsers: ["last 2 version", "IE 9"]}!' +
-              'sass?sourceMap&outputStyle=compressed',
+      test: /\.css$/,
+      loader: 'style!css!postcss',
     }],
   },
+  postcss: () => [
+    postcssImports({
+      glob: true,
+    }),
+    postcssNested(),
+    autoprefixer(),
+    postcssVariables(),
+    postcssCalc(),
+    rucksack(),
+    cssnano(),
+  ],
   resolve: {
     alias: {
       'actions': path.join(root, 'client/actions.js'),
@@ -43,7 +60,7 @@ export default {
       path.join(root, 'client'),
       path.join(root, 'common'),
     ],
-    extensions: ['', '.js', '.jsx', '.json', '.scss', '.css'],
+    extensions: ['', '.js', '.jsx', '.json', '.css'],
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
