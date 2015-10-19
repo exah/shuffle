@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { MentionsInput, Mention } from 'react-mentions';
 import { sendMessage } from '../../smartActions';
 import { roomInputChange, togglePreview } from '../../actions';
-import { EMOJI_REGEX, EMOJI_URL, EMOJI_IMAGES } from '../../../common/emoji';
 import './index.css';
 
 function onKeyPress(e, handler) {
@@ -23,55 +21,28 @@ function onClick(e, handler) {
   handler();
 }
 
-const fakeData = [
-  {
-    id: 'exah',
-    display: 'exah',
-  },
-  {
-    id: '+1',
-    display: '+1',
-  },
-  {
-    id: 'john',
-    display: 'john',
-  },
-];
-
 class RoomInput extends Component {
-  // componentDidUpdate() {
-  //   const textarea = this.refs.textarea;
-  //   textarea.style.height = '';
-  //   textarea.style.height = `${ textarea.scrollHeight }px`;
-  // }
+  componentDidUpdate() {
+    const textarea = this.refs.textarea;
+    textarea.style.height = '';
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }
 
   render() {
     const { dispatch, text, buttonEnabled, previewCollapsed } = this.props;
     return (
       <form className="room-actions"
         onSubmit={e => onClick(e, () => dispatch(sendMessage()))}>
-        <MentionsInput
-          className="room-actions-input"
+        <textarea
+          type="text"
+          ref="textarea"
           placeholder="Message..."
-          style={{'flex': '1'}}
+          className="room-actions-input input"
           onChange={e => dispatch(roomInputChange(e.target.value))}
           onKeyPress={e => onKeyPress(e, () => dispatch(sendMessage()))}
           rows="1"
-          markup={'**@__id__**'}
-          displayTransform={ (id, display, type) => (`@${ id }`) }
-          value={text}>
-          <Mention
-            trigger="@"
-            type="user"
-            data={fakeData}
-            renderSuggestion={ (id) => (`@${ id }`) } />
-
-          <Mention
-            trigger=":"
-            type="emoji"
-            data={fakeData}
-            renderSuggestion={ (id) => (`![](${ EMOJI_URL }/${ id })`) } />
-        </MentionsInput>
+          value={text}
+        ></textarea>
         <button
           className={`btn ${ previewCollapsed ? 'is-off' : ''}`}
           onClick={e => onClick(e, () => dispatch(togglePreview()))}
