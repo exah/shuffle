@@ -12,6 +12,7 @@ export default (el, dispatch) => (($) => {
     },
     template: (value) => `<img src="${ EMOJI_URL }/${ value }.png" /> ${ value }`,
     replace: (value) => `:${ value }: `,
+    index: 1,
   }]).on( 'textComplete:select', () => dispatch(roomInputChange(el.value) ));
 })(jQuery);
 
