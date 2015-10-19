@@ -58,6 +58,7 @@
     "postcss-nested": "^1.0.0",
     "pre-commit": "1.1.1",
     "react-hot-loader": "1.3.0",
+    "react-mentions": "github:exah/react-mentions",
     "react-redux": "2.1.2",
     "redux": "3.0.x",
     "redux-logger": "1.0.8",
