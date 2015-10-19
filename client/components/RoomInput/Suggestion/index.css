@@ -1,0 +1,24 @@
+@import '../../../styles/_common.css';
+
+.textcomplete-dropdown {
+	margin-left: 1em;
+	transform: translateY(-100%);
+
+	overflow: hidden;
+	border-radius: $radius;
+
+	background: white;
+	box-shadow: 0 1px 3px rgba(#000, .15);
+}
+
+.textcomplete-item {
+	padding: .25em .5em;
+
+	img {
+		width: 1.5em;
+	}
+
+	&.active {
+		background-color: whitesmoke;
+	}
+}
