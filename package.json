@@ -48,6 +48,8 @@
     "eslint-plugin-react": "3.3.2",
     "extract-text-webpack-plugin": "0.8.2",
     "html-webpack-plugin": "1.6.1",
+    "jquery": "^2.1.4",
+    "jquery-textcomplete": "^0.8.0",
     "mocha": "2.3.2",
     "normalize-css": "^2.3.1",
     "postcss": "^5.0.10",

@@ -2,6 +2,9 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { sendMessage } from '../../smartActions';
 import { roomInputChange, togglePreview } from '../../actions';
+import { EMOJI_URL, EMOJI_IMAGES } from '../../../common/emoji';
+import $ from 'jquery';
+import 'jquery-textcomplete';
 import './index.css';
 
 function onKeyPress(e, handler) {
@@ -22,6 +25,19 @@ function onClick(e, handler) {
 }
 
 class RoomInput extends Component {
+  componentDidMount() {
+    const textarea = this.refs.textarea;
+    $(textarea).textcomplete([{ // emoji strategy
+      match: /\B:([\-+\w]*)$/,
+      search: (term, callback) => {
+        callback(EMOJI_IMAGES.filter(emoji => emoji.indexOf(term) === 0 ? emoji : null));
+      },
+      template: (value) => `<img src="${ EMOJI_URL }/${ value }.png" /> ${ value }`,
+      replace: (value) => `:${ value }: `,
+      index: 1,
+    }]).on('textComplete:select', () => this.props.dispatch(roomInputChange(textarea.value)));
+  }
+
   componentDidUpdate() {
     const textarea = this.refs.textarea;
     textarea.style.height = '';

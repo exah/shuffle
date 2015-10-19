@@ -1,3 +1,13 @@
 .room-actions-input {
     margin-right: 1rem;
 }
+
+.textcomplete-dropdown {
+	background: white;
+}
+
+.textcomplete-item {
+	img {
+		width: 1.5em;
+	}
+}
