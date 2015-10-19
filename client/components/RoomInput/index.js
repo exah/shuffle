@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { sendMessage } from '../../smartActions';
 import { roomInputChange, togglePreview } from '../../actions';
+import showSuggestion, { destroySuggestion } from './Suggestion';
 import './index.css';
 
 function onKeyPress(e, handler) {
@@ -22,10 +23,18 @@ function onClick(e, handler) {
 }
 
 class RoomInput extends Component {
+  componentDidMount() {
+    showSuggestion(this.refs.textarea, this.props.dispatch);
+  }
+
   componentDidUpdate() {
     const textarea = this.refs.textarea;
     textarea.style.height = '';
     textarea.style.height = `${textarea.scrollHeight}px`;
+  }
+
+  componentWillUnmount() {
+    destroySuggestion(this.refs.textarea);
   }
 
   render() {
