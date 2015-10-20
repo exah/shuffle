@@ -140,7 +140,7 @@ p + p {
 
 .badge {
   border-radius: 99px;
-  background: color(blue);
+  background: $color-blue;
   padding: .15em .5em;
   line-height: 1;
 }

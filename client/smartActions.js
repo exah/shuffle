@@ -65,6 +65,7 @@ export const switchToRoom = (history, roomID) => (dispatch, getState) => {
     .then(realRoomID => {
       if (realRoomID) {
         dispatch(pushState(history, `/room/${realRoomID}`));
+        dispatch(searchInputChange(''));
       }
     });
   } else {
