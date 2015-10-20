@@ -83,7 +83,7 @@ export function rejectJoinRoom(description, roomID) {
   };
 }
 
-export function joinUser({roomID, userID, avatar, nick}) {
+export function joinUser({roomID, userID, avatar, nick, color}) {
   return {
     type: JOIN_USER,
     roomID,
@@ -91,6 +91,7 @@ export function joinUser({roomID, userID, avatar, nick}) {
     user: {
       avatar,
       nick,
+      color,
     },
   };
 }

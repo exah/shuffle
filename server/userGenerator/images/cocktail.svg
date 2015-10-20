@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="27px" height="28px" viewBox="0 0 27 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch Beta 3.3.2 (12041) - http://www.bohemiancoding.com/sketch -->
-    <title>cocktail</title>
-    <desc>Created with Sketch Beta.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-520.000000, -415.000000)" fill="#000000">
-            <path d="M546.652,416.753 C546.86,416.569 547.49,415 546,415 L521.054,415 C519.708,415 519.89,416.313 520.281,416.707 L533,432 L533,441 L529,441 C528.447,441 528,441.448 528,442 C528,442.553 528.447,443 529,443 L539,443 C539.553,443 540,442.553 540,442 C540,441.448 539.553,441 539,441 L535,441 L535,432 L546.652,416.753" id="cocktail" sketch:type="MSShapeGroup"></path>
-        </g>
-    </g>
-</svg>
+<svg width="27" height="28" viewBox="0 0 27 28" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>cocktail</title><desc>Created with Sketch Beta.</desc><path fill="#fff" d="M26.652 1.753c.208-.184.838-1.753-.652-1.753h-24.946c-1.346 0-1.164 1.313-.773 1.707l12.719 15.293v9h-4c-.553 0-1 .448-1 1 0 .553.447 1 1 1h10c.553 0 1-.447 1-1 0-.552-.447-1-1-1h-4v-9l11.652-15.247" sketch:type="MSShapeGroup"/></svg>

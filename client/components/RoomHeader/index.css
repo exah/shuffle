@@ -28,11 +28,3 @@
     }
   }
 }
-
-.user {
-  display: flex;
-
-  &-ava {
-    margin-left: .5em;
-  }
-}

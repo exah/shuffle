@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   secret: { type: String, required: true },
   avatar: { type: String, required: true },
   nick: { type: String, required: true },
+  color: { type: String, required: false },
 });
 
 const User = mongoose.model('User', userSchema);

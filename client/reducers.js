@@ -2,14 +2,6 @@ import { combineReducers } from 'redux';
 import * as actions from 'actions';
 import { routerStateReducer } from 'redux-router';
 
-/*
-  topRooms: [{
-    roomID: string,
-    name: string,
-    users: number,
-    rating: number,
-  }] || null,
-*/
 function topRooms(state = null, action) {
   switch (action.type) {
     case actions.UPDATE_TOP_ROOMS: return action.rooms;
@@ -165,26 +157,6 @@ function rejectSentMessage(room, action) {
   };
 }
 
-/*
-  joinedRooms: HashMap('roomID', {
-    userID: string,
-    secret: string,
-    roomName: string,
-    roomUsers: HashMap('userID', {
-      avatar: string,
-      nick: string,
-    }),
-    roomMessages: HashMap('messageID', {
-      userID: string,
-      messageID: string,
-      text: string,
-      time: number,
-      index: number,
-      status: 'sent' | 'confirmed' | 'rejected',
-    })],
-    orderedMessages: ['messageID'],
-  });
-*/
 function joinedRooms(state = {}, action) {
   function insideRoom(roomID, reducer) {
     const room = state[roomID];
@@ -226,12 +198,13 @@ function joinedRooms(state = {}, action) {
       const { userID, secret } = identity;
       const roomName = room.name;
       const roomUsers = room.users
-        .reduce( (result, {userID: key, avatar, nick} ) => {
+        .reduce( (result, {userID: key, avatar, nick, color} ) => {
           return {
             ...result,
             [key]: {
               avatar,
               nick,
+              color,
             },
           };
         }, {});
@@ -287,20 +260,6 @@ const initialUi = {
   searchResults: null,
 };
 
-/*
-   ui: {
-     navigationCollapsed: boolean,
-     previewCollapsed: boolean,
-     searchInputText: string,
-     roomInputText: string,
-     searchResults: null || [{
-       roomID: string,
-       name: string,
-       users: number,
-       rating: number,
-     }],
-   }
-*/
 function ui(state = initialUi, action) {
   switch (action.type) {
     case actions.CREATE_ROOM_FAILED: {

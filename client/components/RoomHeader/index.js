@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import { toggleNavigation } from '../../actions';
 import React, { Component } from 'react';
+import Ava from '../Ava';
 import './index.css';
 
 class RoomHeader extends Component {
   render() {
     const { dispatch, navigationCollapsed, room } = this.props;
     const { roomName } = room;
-    const { nick, avatar } = room.roomUsers[room.userID] || {}; // TODO fix it
+    const { nick, avatar, color } = room.roomUsers[room.userID] || {}; // TODO fix it
 
     return (
       <header className="room-header">
@@ -25,18 +26,13 @@ class RoomHeader extends Component {
           </li>
         </ul>
         <ul className="room-header-bar">
-          <li>
-            <h4 className="user-name">
-              {nick}
-            </h4>
+          <li className="room-header-bar-item">
+            <h4>{nick}</h4>
           </li>
-            <li>
-              <div
-                className="user-ava ava"
-                style={{ backgroundImage: `url(${ avatar })` }}>
-              </div>
-            </li>
-          </ul>
+          <li className="room-header-bar-item">
+            <Ava avatar={avatar} color={color} />
+          </li>
+        </ul>
       </header>
     );
   }

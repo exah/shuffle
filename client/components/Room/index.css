@@ -40,7 +40,7 @@
 		position: relative;
 
 		padding: .75rem 1rem .9rem;
-		border-top: 1px solid rgba(black, .05);
+		border-top: 1px solid rgba(#000, .05);
 
 		&-input {
 			flex: 1;
@@ -48,7 +48,6 @@
 
 		&-send {
 			margin-left: 1rem;
-			background-color: color(blue);
 		}
 	}
 }

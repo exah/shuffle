@@ -50,15 +50,19 @@
       }
 
       .message--myself & {
-        border-color: $color-blue;
+        border-color: currentcolor;
+        color: $color-grey;
 
         &:before {
-          border-left-color: $color-blue;
-          border-bottom-color: $color-blue;
+          border-left-color: currentcolor;
+          border-bottom-color: currentcolor;
         }
       }
 
-      .md { margin: 1em 0; }
+      .md {
+        margin: 1em 0;
+        color: #333;
+      }
     }
   }
 
@@ -100,7 +104,15 @@
   flex-shrink: 0;
   width: $ava-width;
   height: $ava-width;
-  border-radius: 999px;
+  border-radius: 50%;
   background-color: $color-grey;
-  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-icon {
+   width: 20px;
+   height: 20px;
+   object-fit: contain;
+  }
 }

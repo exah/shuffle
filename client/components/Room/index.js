@@ -12,16 +12,18 @@ class Room extends Component {
     const { orderedMessages, roomMessages, roomUsers } = room;
 
     const ourUserID = room.userID;
-    const {nick: ourNick, avatar: ourAvatar} = room.roomUsers[ourUserID];
+    const {nick: ourNick, avatar: ourAvatar, color: ourColor } = room.roomUsers[ourUserID];
 
     const messages = orderedMessages.map(messageID => {
       const { text, time, userID,
               status, attachments } = roomMessages[messageID];
-      const { nick, avatar } = roomUsers[userID] ? roomUsers[userID] : {
+      const user = roomUsers[userID];
+      const { nick, avatar } = user ? user : {
         nick: 'Leaved user',
         avatar: '', // TODO link to our logo with anonym man
+        color: '',
       };
-
+      const color =  user && user.color ? roomUsers[userID].color : '';
       const isOurMessage = (ourUserID === userID);
 
       return {
@@ -31,6 +33,7 @@ class Room extends Component {
         isOurMessage,
         avatar,
         status,
+        color,
         attachments,
       };
     });
@@ -40,6 +43,7 @@ class Room extends Component {
       time: null,
       nick: ourNick,
       avatar: ourAvatar,
+      color: ourColor,
       status: 'preview',
       attachments: [],
     };
