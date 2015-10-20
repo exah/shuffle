@@ -1,4 +1,7 @@
 import _ from 'lodash';
+import ntc from 'ntc';
+import randomcolor from 'randomcolor';
+import { readdir } from 'fs';
 
 const FIRST = [
   'Limited', 'Endless', 'Orange', 'Blue', 'Swollen', 'Horrible',
@@ -14,6 +17,28 @@ function _generateUrl(uid) {
   const gender = _.sample(GENDER);
   return `http://eightbitavatar.herokuapp.com/?id=${uid}&s=${gender}&size=64`;
 }
+
+function _getRandomIcon() {
+  return new Promise((resolve, reject) => {
+    readdir('./server/userGenerator/images', (err, files) => {
+      if (err) {
+        return reject(err);
+      }
+
+      if (files.length < 1) {
+        return reject(new Error('No icons'));
+      }
+
+      const svgRegex = new RegExp(/\.(svg)/, 'gi');
+      const icons = files.filter( icon => svgRegex.test(icon) );
+
+      resolve(_.sample(icons));
+    });
+  });
+}
+
+_getRandomIcon().then(icon => console.log(icon));
+
 /**
  * Генерирует имя пользователя
  * @return {string}
@@ -28,4 +53,13 @@ export function generateName() {
  */
 export function generateAvatar(uid) {
   return _generateUrl(uid);
+}
+
+export function generateUser() {
+  const color = randomcolor();
+  return {
+    color: color,
+    colorName: ntc(color),
+    icon: _getRandomIcon(),
+  };
 }

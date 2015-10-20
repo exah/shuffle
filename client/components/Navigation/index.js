@@ -56,7 +56,7 @@ class Navigation extends Component {
             </ul>
           </div>
         }
-        { _.isEmpty(joinedRooms) ? false :
+        { _.isEmpty(joinedRooms) || searchResults ? false :
          <div className="navigation-group">
             <h4 className="navigation-group-label"> Joined </h4>
             <ul className="navigation-group-list">
