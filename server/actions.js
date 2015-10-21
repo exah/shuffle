@@ -35,18 +35,20 @@ function _getRoom(roomID) {
  */
 function _createUser({room}) {
   return userGenerator.randomAvatar()
-    .then(avatar => {
+    .then(generatedAvatar => {
       return new Promise((resolve, reject) => {
         const userID = uuid.v4();
-        const colorObject = userGenerator.generateColor();
+        const generatedUser = userGenerator.generateUser();
+
         const user = new User({
           roomID: room.roomID,
           userID,
           secret: uuid.v4(),
-          avatar: avatar,
-          nick: userGenerator.generateName(),
-          color: colorObject.hex,
+          avatar: generatedAvatar,
+          nick: generatedUser.name,
+          color: generatedUser.color,
         });
+
         room.users.push(user);
         room.update({$push: {users: user}, $inc: {rating: 1}}, (err) => {
           if (err) {

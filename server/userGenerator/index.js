@@ -1,40 +1,12 @@
 import _ from 'lodash';
 import ntc from 'ntc';
+import Chance from 'chance';
 import randomcolor from 'randomcolor';
 import { readdir } from 'fs';
 
-const FIRST = [
-  'Limited', 'Endless', 'Orange', 'Blue', 'Swollen', 'Horrible',
-  'Great', 'Awesome', 'Terrible', 'Idiotic', 'Massive', 'Cheesy',
-];
-const LAST = [
-  'Peppermints', 'Oil', 'Dragon', 'Cafeteria', 'Junkie', 'Vegetables', 'Twinkies',
-  'Turtle', 'Fox', 'Calculator', 'Bandwidth', 'Crust', 'Cake', 'Derp',
-];
-const GENDER = ['male', 'female'];
+const chance = new Chance();
 
-function _generateUrl(uid) {
-  const gender = _.sample(GENDER);
-  return `http://eightbitavatar.herokuapp.com/?id=${uid}&s=${gender}&size=64`;
-}
-
-/**
- * Генерирует имя пользователя
- * @return {string}
- */
-export function generateName() {
-  return (_.sample(FIRST) + '_' + _.sample(LAST)).toLowerCase();
-}
-
-/**
- * Генерирует ссылку на аватар пользователя
- * @return {string}
- */
-export function generateAvatar(uid) {
-  return _generateUrl(uid);
-}
-
-export function generateColor() {
+function _generateColor() {
   const color = randomcolor({ luminosity: 'dark' });
   return {
     hex: color,
@@ -42,9 +14,25 @@ export function generateColor() {
   };
 }
 
+/**
+ * Генерирует имя и цвет пользователя
+ * @return {object}
+ */
+
+export function generateUser() {
+  const randomColor = _generateColor();
+  const randomWord = chance.word();
+
+  return {
+    name: `${randomColor.name} ${randomWord}`.replace(/\s+/g, '_').toLowerCase(),
+    color: randomColor.hex,
+  };
+}
+
 export function randomAvatar() {
   return new Promise((resolve, reject) => {
-    readdir('./server/userGenerator/images', (err, files) => {
+    const dir = '/server/userGenerator/images';
+    readdir(`.${ dir }`, (err, files) => {
       if (err) {
         return reject(err);
       }
@@ -55,7 +43,7 @@ export function randomAvatar() {
 
       const svgRegex = new RegExp(/\.(svg)/, 'gi');
       const icons = files.filter( icon => svgRegex.test(icon) );
-      const iconUrl = encodeURI(`/server/userGenerator/images/${ _.sample(icons) }`);
+      const iconUrl = encodeURI(`${ dir }/${ _.sample(icons) }`);
 
       resolve(iconUrl);
     });
