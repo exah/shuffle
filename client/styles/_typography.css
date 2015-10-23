@@ -40,9 +40,10 @@ p + p {
 
 /* Helpers:*/
 
-.article, .md {
+.article {
   $borders: 1px solid color(grey, light);
   line-height: 1.5;
+  color: #222;
 
   a {
     text-decoration: underline;

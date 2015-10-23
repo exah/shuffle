@@ -1,0 +1,18 @@
+@import '../../styles/_common.css';
+
+.ava {
+  flex-shrink: 0;
+  width: $ava-width;
+  height: $ava-width;
+  border-radius: 50%;
+  background-color: $color-grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-icon {
+   width: 20px;
+   height: 20px;
+   object-fit: contain;
+  }
+}

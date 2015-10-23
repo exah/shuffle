@@ -5,6 +5,7 @@
   margin-top: .75rem;
   margin-bottom: .75rem;
   transition: opacity .2s;
+  transform: translateX(0);
 
   &-meta {
     display: flex;
@@ -13,10 +14,10 @@
     margin-left: $ava-width;
     padding-left: 1rem;
     color: $color-grey;
-  }
 
-  &-time {
-    padding: 0 .5em .1em;
+    &-status {
+      padding: 0 .5em .1em;
+    }
   }
 
   &-content {
@@ -34,7 +35,12 @@
       word-wrap: break-word;
       hyphens: auto;
 
-      &:before {
+      background-color: white;
+      padding: 0 1.5rem .25em;
+      border-radius: $radius;
+      border: 1px solid $color-grey-light;
+
+      &::before {
         content: "";
         position: absolute;
         display: block;
@@ -48,21 +54,20 @@
 
         transform: translate3d(50%, 0, 0) rotate(45deg);
       }
+    }
+  }
 
-      .message--myself & {
-        border-color: currentcolor;
-        color: $color-grey;
+/*
+ * Статусы сообщений
+ */
 
-        &:before {
-          border-left-color: currentcolor;
-          border-bottom-color: currentcolor;
-        }
-      }
+  &--myself .message-content-text {
+    border-color: currentcolor;
+    color: $color-grey;
 
-      .md {
-        margin: 1em 0;
-        color: #333;
-      }
+    &::before {
+      border-left-color: currentcolor;
+      border-bottom-color: currentcolor;
     }
   }
 
@@ -77,7 +82,7 @@
   &--rejected {
     cursor: not-allowed;
 
-    .message-time {
+    .message-meta-status {
       background-color: red;
       color: white;
       border-radius: 16px;
@@ -85,34 +90,10 @@
   }
 
   &--sent {
-    .message-time {
+    .message-meta-status {
       background-color: $color-grey;
       color: white;
       border-radius: 16px;
     }
-  }
-}
-
-.bubble {
-  background-color: white;
-  padding: 0 1.5rem .25em;
-  border-radius: $radius;
-  border: 1px solid $color-grey-light;
-}
-
-.ava {
-  flex-shrink: 0;
-  width: $ava-width;
-  height: $ava-width;
-  border-radius: 50%;
-  background-color: $color-grey;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &-icon {
-   width: 20px;
-   height: 20px;
-   object-fit: contain;
   }
 }
