@@ -20,7 +20,7 @@ beforeEach( done => {
   }
 
   if (mongoose.connection.readyState === 0) {
-    mongoose.connect(config.db.test, err => {
+    mongoose.connect(config.dbHost, err => {
       if (err) {
         throw err;
       }

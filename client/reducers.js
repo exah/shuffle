@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as actions from 'actions';
+import * as actions from './actions';
 import { routerStateReducer } from 'redux-router';
 
 function topRooms(state = null, action) {

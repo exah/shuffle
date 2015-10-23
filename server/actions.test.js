@@ -13,6 +13,7 @@ before( () => {
     secret: 'secret',
     text: 'text',
     time: 0,
+    color: 'color',
   };
 });
 

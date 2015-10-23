@@ -18,7 +18,7 @@ const config = ( (base, enviroment) => {
         socketPort: 3001,
         dbHost: dbHost + '/anonymClub-dev',
       };
-    case 'testing':
+    case 'test':
       return {
         ...base,
         httpPort: 8080,

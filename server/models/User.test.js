@@ -11,6 +11,7 @@ describe('User: model', () => {
         secret: 'secret',
         avatar: 'avatar',
         nick: 'nick',
+        color: 'color',
       };
       const user = new User(userData);
       user.save( (err, createdUser) => {
@@ -20,6 +21,7 @@ describe('User: model', () => {
         assert.equal(createdUser.secret, 'secret');
         assert.equal(createdUser.avatar, 'avatar');
         assert.equal(createdUser.nick, 'nick');
+        assert.equal(createdUser.color, 'color');
         done();
       });
     });

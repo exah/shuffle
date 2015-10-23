@@ -7,11 +7,11 @@ import io from 'socket.io-client';
 
 import config from '../config';
 
-const socket = io('http://' + config.host + ':' + config.socket.port);
+const socket = io('http://' + config.host + ':' + config.socketPort);
 
-describe('Socket server test on port' + config.socket.port, () => {
+describe('Socket server test on port :' + config.socketPort, () => {
   before( () => {
-    dataServer(config.socket.port);
+    dataServer(config.socketPort);
   });
 
   const mockRoomID = 'lobby';
