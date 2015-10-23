@@ -11,7 +11,7 @@ renderer.image = ( href, title, text ) => {
     out += ` title="${ title }"`;
   }
   if (text === 'emoji') {
-    out += ` class="md-emoji"`;
+    out += ` class="article-emoji"`;
   }
   out += '/>';
   return out;

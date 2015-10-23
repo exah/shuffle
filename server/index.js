@@ -42,6 +42,7 @@ if (config.hotReload) {
     console.log('FIle and hot reload server listening on *:' + config.httpPort);
   });
   fileServer.use('/enviroment.js', (req, res) => res.send());
+  fileServer.use('/ava/', express.static(__dirname + '/userGenerator/images'));
 } else {
   const app = express();
   const httpServer = new http.Server(app);
@@ -57,6 +58,8 @@ if (config.hotReload) {
       window.ENVIROMENT_SOCKET_PORT = ${config.socketPort};
     `);
   });
+
+  app.use('/ava/', express.static(__dirname + '/userGenerator/images'));
 
   httpServer.listen(config.httpPort, () => {
     console.log('File server listening on *:' + config.httpPort);

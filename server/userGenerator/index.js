@@ -6,6 +6,11 @@ import { readdir } from 'fs';
 
 const chance = new Chance();
 
+/**
+ * Генерирует цвет и возврщает его имяы
+ * @return {object}
+ */
+
 function _generateColor() {
   const color = randomcolor({ luminosity: 'dark' });
   return {
@@ -21,13 +26,18 @@ function _generateColor() {
 
 export function generateUser() {
   const randomColor = _generateColor();
-  const randomWord = chance.word();
+  const randomWord = chance.first();
 
   return {
     name: `${randomColor.name} ${randomWord}`.replace(/\s+/g, '_').toLowerCase(),
     color: randomColor.hex,
   };
 }
+
+/**
+ * Генерирует аватар пользователя
+ * @return {string}
+ */
 
 export function randomAvatar() {
   return new Promise((resolve, reject) => {
@@ -43,7 +53,7 @@ export function randomAvatar() {
 
       const svgRegex = new RegExp(/\.(svg)/, 'gi');
       const icons = files.filter( icon => svgRegex.test(icon) );
-      const iconUrl = encodeURI(`${ dir }/${ _.sample(icons) }`);
+      const iconUrl = encodeURI(`/ava/${ _.sample(icons) }`);
 
       resolve(iconUrl);
     });
