@@ -45,8 +45,7 @@ class RoomInput extends Component {
           onChange={e => dispatch(roomInputChange(e.target.value))}
           onKeyPress={e => onKeyPress(e, () => dispatch(sendMessage()))}
           rows="1"
-          value={text}
-        ></textarea>
+          value={text} />
         <button
           className="room-actions-send btn"
           type="submit"

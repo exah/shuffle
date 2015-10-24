@@ -149,3 +149,9 @@ p + p {
 .faded {
   color: color(grey);
 }
+
+.cut-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
