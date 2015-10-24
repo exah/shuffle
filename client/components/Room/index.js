@@ -1,11 +1,36 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import IScroll from 'iscroll';
 import RoomHeader from '../RoomHeader';
 import MessageList from '../MessageList';
 import RoomInput from '../RoomInput';
 import './index.css';
 
 class Room extends Component {
+  componentDidMount() {
+    const roomMessages = this.refs.roomMessages;
+
+    this.iscroll = new IScroll(roomMessages, {
+      scrollbars: true,
+      scrollY: true,
+      mouseWheel: true,
+      interactiveScrollbars: true,
+//      scrollbars: 'custom',
+    });
+
+    this.iscroll.scrollTo( 0, this.iscroll.maxScrollY );
+  }
+
+  componentDidUpdate() {
+    setTimeout(() => {
+      this.iscroll.refresh();
+
+      if ( this.iscroll.y <= this.iscroll.maxScrollY + 400 ) {
+        this.iscroll.scrollTo( 0, this.iscroll.maxScrollY );
+      }
+    }, 0);
+  }
+
   render() {
     const { room, showPreview, inputText } = this.props;
     const { orderedMessages, roomMessages, roomUsers } = room;
@@ -50,7 +75,7 @@ class Room extends Component {
     return (
       <div className="room">
         <RoomHeader room={room} />
-        <div className="room-messages" id="roomMessages">
+        <div className="room-messages" id="roomMessages" ref="roomMessages">
           <MessageList messages={messages}
             previewMessage={previewMessage}
             showPreview={showPreview} />

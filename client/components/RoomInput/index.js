@@ -3,18 +3,12 @@ import React, { Component } from 'react';
 import { sendMessage } from '../../smartActions';
 import { roomInputChange } from '../../actions';
 import showSuggestion, { destroySuggestion } from './Suggestion';
-import { throttle } from 'lodash';
 import './index.css';
 
 function onKeyPress(e, handler) {
   if (e.which === 13 && !e.shiftKey) {
     e.preventDefault();
     handler();
-  }
-
-  const roomMessages = document.getElementById('roomMessages');
-  if (roomMessages !== null) {
-    roomMessages.scrollTop = roomMessages.scrollHeight;
   }
 }
 
@@ -49,7 +43,7 @@ class RoomInput extends Component {
           placeholder="Message..."
           className="room-actions-input input"
           onChange={e => dispatch(roomInputChange(e.target.value))}
-          onKeyPress={throttle(e => onKeyPress(e, () => dispatch(sendMessage())))}
+          onKeyPress={e => onKeyPress(e, () => dispatch(sendMessage()))}
           rows="1"
           value={text}
         ></textarea>
