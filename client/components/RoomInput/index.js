@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { sendMessage } from '../../smartActions';
-import { roomInputChange, togglePreview } from '../../actions';
+import { roomInputChange } from '../../actions';
 import showSuggestion, { destroySuggestion } from './Suggestion';
+import { throttle } from 'lodash';
 import './index.css';
 
 function onKeyPress(e, handler) {
@@ -38,7 +39,7 @@ class RoomInput extends Component {
   }
 
   render() {
-    const { dispatch, text, buttonEnabled, previewCollapsed } = this.props;
+    const { dispatch, text, buttonEnabled } = this.props;
     return (
       <form className="room-actions"
         onSubmit={e => onClick(e, () => dispatch(sendMessage()))}>
@@ -48,14 +49,10 @@ class RoomInput extends Component {
           placeholder="Message..."
           className="room-actions-input input"
           onChange={e => dispatch(roomInputChange(e.target.value))}
-          onKeyPress={e => onKeyPress(e, () => dispatch(sendMessage()))}
+          onKeyPress={throttle(e => onKeyPress(e, () => dispatch(sendMessage())))}
           rows="1"
           value={text}
         ></textarea>
-        <button
-          className={`btn ${ previewCollapsed ? 'is-off' : ''}`}
-          onClick={e => onClick(e, () => dispatch(togglePreview()))}
-        > Preview </button>
         <button
           className="room-actions-send btn"
           type="submit"
@@ -69,11 +66,9 @@ class RoomInput extends Component {
 
 export default connect(state => {
   const text = state.ui.roomInputText;
-  const { previewCollapsed } = state.ui;
 
   return {
     buttonEnabled: !!text,
-    previewCollapsed,
     text,
   };
 })(RoomInput);

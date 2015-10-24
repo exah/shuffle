@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import RoomHeader from '../RoomHeader';
 import MessageList from '../MessageList';
-import Message from '../Message';
 import RoomInput from '../RoomInput';
 import './index.css';
 
@@ -20,7 +19,7 @@ class Room extends Component {
       const user = roomUsers[userID];
       const { nick, avatar } = user ? user : {
         nick: 'Leaved user',
-        avatar: '', // TODO link to our logo with anonym man
+        avatar: '',
         color: '',
       };
       const color =  user && user.color ? roomUsers[userID].color : '';
@@ -52,12 +51,9 @@ class Room extends Component {
       <div className="room">
         <RoomHeader room={room} />
         <div className="room-messages" id="roomMessages">
-          {!showPreview ? false :
-            <div className="room-messages-preview">
-              <Message message={previewMessage} />
-            </div>
-          }
-          <MessageList messages={messages} />
+          <MessageList messages={messages}
+            previewMessage={previewMessage}
+            showPreview={showPreview} />
         </div>
         <RoomInput />
       </div>
