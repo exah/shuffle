@@ -1,0 +1,22 @@
+@import '../../styles/_common.css';
+
+.ScrollWrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.iScrollVerticalScrollbar {
+	position: absolute;
+	top: .2rem;
+	bottom: .2rem;
+	right: .2rem;
+	width: .5rem;
+}
+
+.iScrollIndicator {
+	position: absolute;
+	width: 100%;
+	background: rgba($color-grey, .5);
+	border-radius: $radius;
+}

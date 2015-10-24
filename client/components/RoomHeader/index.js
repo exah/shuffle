@@ -27,7 +27,7 @@ class RoomHeader extends Component {
         </ul>
         <ul className="room-header-bar">
           <li className="room-header-bar-item">
-            <h4>{nick}</h4>
+            <h4 className="cut-text">{nick}</h4>
           </li>
           <li className="room-header-bar-item">
             <Ava avatar={avatar} color={color} />

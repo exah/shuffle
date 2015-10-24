@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import RoomHeader from '../RoomHeader';
 import MessageList from '../MessageList';
 import RoomInput from '../RoomInput';
+import ScrollWrapper from '../ScrollWrapper';
 import './index.css';
 
 class Room extends Component {
@@ -50,10 +51,12 @@ class Room extends Component {
     return (
       <div className="room">
         <RoomHeader room={room} />
-        <div className="room-messages" id="roomMessages">
-          <MessageList messages={messages}
-            previewMessage={previewMessage}
-            showPreview={showPreview} />
+        <div className="room-messages">
+          <ScrollWrapper trigger={inputText} stickToBottom="true">
+            <MessageList messages={messages}
+              previewMessage={previewMessage}
+              showPreview={showPreview} />
+          </ScrollWrapper>
         </div>
         <RoomInput />
       </div>

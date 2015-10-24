@@ -5,16 +5,13 @@
 	flex: 1;
 
 	&-messages {
-		display: flex;
-		flex-direction: column-reverse;
-
-		flex: 1;
-
-		overflow: auto;
+		flex: 1 1 0;
+		overflow: hidden;
+		display:flex;
+		flex-direction: column;
+		justify-content: flex-end;
 
     background-color: #f5f5f5;
-
-		padding: 1.15em;
 	}
 
 	&-actions {
@@ -34,14 +31,5 @@
 		&-send {
 			margin-left: 1rem;
 		}
-	}
-}
-
-/* https://bugzilla.mozilla.org/show_bug.cgi?id=1042151 */
-body:not(:-moz-handler-blocked) .room-messages {
-	justify-content: flex-end;
-
-	.messages {
-		padding-bottom: 2em;
 	}
 }

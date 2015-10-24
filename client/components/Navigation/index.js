@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { switchToRoom, leaveRoom,
          createRoom, searchInputChange } from '../../smartActions';
+import ScrollWrapper from '../ScrollWrapper';
 import './index.css';
 import _ from 'lodash';
 
@@ -20,84 +21,90 @@ class Navigation extends Component {
         'navigation is-collapsed' :
         'navigation'
       }>
-        <div className="navigation-group">
-          <input
-            onChange={e => dispatch(searchInputChange(e.target.value))}
-            value={searchText}
-            type="text"
-            className="input--underline"
-            placeholder="# Find / Create new" />
-        </div>
-        {!shouldShowCreation ? false :
+        <ScrollWrapper trigger={ this.props }><div className="navigation_wrapper">
           <div className="navigation-group">
-            <h4 className="navigation-group-label"> Create Room </h4>
-            <a href={`/room/${searchText}`}
-              onClick={e => onClick(e, () =>
-                dispatch(createRoom(history, searchText)))}>
-                {`#${searchText}`}
-            </a>
+            <input
+              onChange={e => dispatch(searchInputChange(e.target.value))}
+              value={searchText}
+              type="text"
+              className="input--underline"
+              placeholder="# Find / Create new" />
           </div>
-        }
-        {!searchResults || !searchResults.length ? false :
-          <div className="navigation-group">
-            <h4 className="navigation-group-label"> Search Results </h4>
-            <ul className="navigation-group-list">
-              {_.map(searchResults, ({roomID, name, rating, users}, index) =>
-                <li key={index} className="navigation-group-list-item">
-                  <a href={`/room/${roomID}`}
+          {!shouldShowCreation ? false :
+            <div className="navigation-group">
+              <h4 className="navigation-group-label"> Create Room </h4>
+              <ul className="navigation-group-list">
+                <li className="navigation-group-list-item">
+                  <a href={`/room/${searchText}`}
                     onClick={e => onClick(e, () =>
-                      dispatch(switchToRoom(history, roomID)))}
-                    title={name}>
-                      {`#${roomID}`}
+                      dispatch(createRoom(history, searchText)))}>
+                      {`#${searchText}`}
                   </a>
-                  <span className="badge">{users}</span>
                 </li>
-              )}
-            </ul>
-          </div>
-        }
-        { _.isEmpty(joinedRooms) || searchResults ? false :
-         <div className="navigation-group">
-            <h4 className="navigation-group-label"> Joined </h4>
-            <ul className="navigation-group-list">
-              {_.map(joinedRooms, ({roomName: name}, roomID) =>
-                  <li
-                    key={roomID}
-                    className={roomID === routerRoomID ? 'navigation-group-list-item navigation-group-list-item--active' : 'navigation-group-list-item'}>
-                  <a href={`/room/${roomID}`}
-                    onClick={e => onClick(e, () =>
-                      dispatch(switchToRoom(history, roomID)))}
-                    title={name}>
-                      {`#${roomID}`}
-                  </a>
-                  <button
-                    className="reset-input"
-                    onClick={() => dispatch(leaveRoom(history, roomID))}>
-                      x
-                  </button>
-                </li>
-              )}
-            </ul>
-          </div>
-        }
-        {searchResults ? false :
-          <div className="navigation-group">
-            <h4 className="navigation-group-label"> Top Channels </h4>
-            <ul className="navigation-group-list">
-              {_.map(topRooms, ({name, users, roomID}, index) =>
-                <li key={index} className="navigation-group-list-item">
-                  <a href={`/room/${roomID}`}
-                    onClick={e => onClick(e, () =>
-                      dispatch(switchToRoom(history, roomID)))}
-                    title={name}>
-                      {`#${roomID}`}
-                  </a>
-                  <span className="badge">{users}</span>
-                </li>
-              )}
-            </ul>
-          </div>
-        }
+              </ul>
+            </div>
+          }
+          {!searchResults || !searchResults.length ? false :
+            <div className="navigation-group">
+              <h4 className="navigation-group-label"> Search Results </h4>
+              <ul className="navigation-group-list">
+                {_.map(searchResults, ({roomID, name, rating, users}, index) =>
+                  <li key={index} className="navigation-group-list-item">
+                    <a href={`/room/${roomID}`}
+                      onClick={e => onClick(e, () =>
+                        dispatch(switchToRoom(history, roomID)))}
+                      title={name}>
+                        {`#${roomID}`}
+                    </a>
+                    <span className="badge">{users}</span>
+                  </li>
+                )}
+              </ul>
+            </div>
+          }
+          { _.isEmpty(joinedRooms) || searchResults ? false :
+           <div className="navigation-group">
+              <h4 className="navigation-group-label"> Joined </h4>
+              <ul className="navigation-group-list">
+                {_.map(joinedRooms, ({roomName: name}, roomID) =>
+                    <li
+                      key={roomID}
+                      className={roomID === routerRoomID ? 'navigation-group-list-item navigation-group-list-item--active' : 'navigation-group-list-item'}>
+                    <a href={`/room/${roomID}`}
+                      onClick={e => onClick(e, () =>
+                        dispatch(switchToRoom(history, roomID)))}
+                      title={name}>
+                        {`#${roomID}`}
+                    </a>
+                    <button
+                      className="reset-input"
+                      onClick={() => dispatch(leaveRoom(history, roomID))}>
+                        x
+                    </button>
+                  </li>
+                )}
+              </ul>
+            </div>
+          }
+          {searchResults ? false :
+            <div className="navigation-group">
+              <h4 className="navigation-group-label"> Top Channels </h4>
+              <ul className="navigation-group-list">
+                {_.map(topRooms, ({name, users, roomID}, index) =>
+                  <li key={index} className="navigation-group-list-item">
+                    <a href={`/room/${roomID}`}
+                      onClick={e => onClick(e, () =>
+                        dispatch(switchToRoom(history, roomID)))}
+                      title={name}>
+                        {`#${roomID}`}
+                    </a>
+                    <span className="badge">{users}</span>
+                  </li>
+                )}
+              </ul>
+            </div>
+          }
+        </div></ScrollWrapper>
       </nav>
     );
   }
