@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import React from 'react';
 import { createRoom, searchInputChange } from '../../smartActions';
 import ScrollWrapper from '../ScrollWrapper';
 import NavigationGroup from './NavigationGroup';
@@ -11,10 +11,24 @@ function onClick(e, handler) {
   handler();
 }
 
-class Navigation extends Component {
-  render() {
-    const { dispatch, collapsed, routerRoomID: currentRoom, shouldShowCreation,
-            userRooms, topRooms, searchResults, searchText, history } = this.props;
+const Navigation = ({
+  dispatch, collapsed, routerRoomID: currentRoom, joinedRooms,
+  topRooms, searchResults, searchText, history }) => {
+    const shouldShowCreation =
+      searchText.length > 0 &&
+      searchResults &&
+      !(
+        searchResults[0] &&
+        searchText === searchResults[0].roomID
+      );
+
+    const userRooms = _.map(joinedRooms, ({ roomName: name, roomUsers }, roomID) => {
+      return {
+        name: name,
+        roomID: roomID,
+        users: _.size(roomUsers),
+      };
+    });
 
     const navigationClasses = [
       'navigation',
@@ -57,12 +71,14 @@ class Navigation extends Component {
             <NavigationGroup
               rooms={searchResults}
               dispatch={dispatch}
+              history={history}
               label="Search Results" />
           }
           { _.isEmpty(userRooms) || searchResults ? false :
             <NavigationGroup
               rooms={userRooms}
               dispatch={dispatch}
+              history={history}
               isJoined="true"
               currentRoom={currentRoom}
               label="Joined" />
@@ -72,14 +88,14 @@ class Navigation extends Component {
             <NavigationGroup
               rooms={topRooms}
               dispatch={dispatch}
+              history={history}
               label="Top Rooms" />
           }
 
         </div></ScrollWrapper>
       </nav>
     );
-  }
-}
+  };
 
 export default connect(state => {
   const collapsed = state.ui.navigationCollapsed;
@@ -87,30 +103,14 @@ export default connect(state => {
   const searchResults = state.ui.searchResults;
   const searchText = state.ui.searchInputText;
   const routerRoomID = state.router.params.roomID;
-  const shouldShowCreation =
-    searchText.length > 0 &&
-    searchResults &&
-    !(
-      searchResults[0] &&
-      searchText === searchResults[0].roomID
-    );
-
-  const userRooms = _.map(joinedRooms, ({ roomName: name, roomUsers }, roomID) => {
-    return {
-      name: name,
-      roomID: roomID,
-      users: _.size(roomUsers),
-    };
-  });
 
   return {
     collapsed,
     topRooms,
     searchResults,
     searchText,
-    userRooms,
+    joinedRooms,
     routerRoomID,
-    shouldShowCreation,
   };
 })(Navigation);
 
