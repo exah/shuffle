@@ -1,54 +1,26 @@
-import 'index.css';
 import 'babel-core/polyfill';
 
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import createStore from './store';
+import reducers from './reducers';
 
 import { readState } from './storage';
-import createStorePlus from './store';
-import all from './reducers';
-import App from './components/App';
-import Door from './components/Door';
-import NotFound from './components/Splashes/NotFound';
+import { restoreState } from './smartActions';
+
+import * as transport from './transport';
 import { updateTopRooms, newMessage, newAttachment,
          joinUser, leaveUser } from 'actions';
-import { restoreState } from './smartActions';
-import * as transport from './transport';
-import { ReduxRouter } from 'redux-router';
-import { Route } from 'react-router';
 
-const store = createStorePlus(all);
-const rootElement = document.getElementById('content');
-const lastState = readState();
+import components from './components';
 
-const app = (
-  <Provider store={store}>
-    <ReduxRouter>
-      <Route path="/" component={App}>
-        <Route path="/room/:roomID" component={Door}/>
-        <Route path="*" component={NotFound}/>
-      </Route>
-    </ReduxRouter>
-  </Provider>
-);
+const store = createStore(reducers);
 
-transport.onMessage(data =>
-    store.dispatch(newMessage(data)));
+components(store);
 
-transport.onAttachment(data =>
-    store.dispatch(newAttachment(data)));
+transport.onMessage( data => store.dispatch( newMessage(data) ) );
+transport.onAttachment( data => store.dispatch( newAttachment(data) ) );
+transport.onJoinUser( data => store.dispatch( joinUser(data) ) );
+transport.onLeaveUser( data => store.dispatch( leaveUser(data) ) );
+transport.onTopRooms( data => store.dispatch( updateTopRooms(data.rooms) ) );
 
-transport.onJoinUser(data =>
-    store.dispatch(joinUser(data)));
-transport.onLeaveUser(data =>
-    store.dispatch(leaveUser(data)));
-
-transport.onTopRooms(data =>
-    store.dispatch(updateTopRooms(data.rooms)));
-
-render(app, rootElement);
-
-// dispatch after render. otherwise the router doesn't initialize correctly
-store.dispatch(restoreState(lastState));
+store.dispatch( restoreState( readState() ) );
 
