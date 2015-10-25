@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { sendMessage } from '../../smartActions';
 import { roomInputChange } from '../../actions';
 import showSuggestion, { destroySuggestion } from './Suggestion';
-import './index.css';
 
 function onKeyPress(e, handler) {
   if (e.which === 13 && !e.shiftKey) {
