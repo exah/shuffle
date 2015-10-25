@@ -52,7 +52,7 @@ class Room extends Component {
       <div className="room">
         <RoomHeader room={room} />
         <div className="room-messages">
-          <ScrollWrapper trigger={inputText} stickToBottom="true">
+          <ScrollWrapper stickToBottom="true" switcher={room.roomName}>
             <MessageList messages={messages}
               previewMessage={previewMessage}
               showPreview={showPreview} />
