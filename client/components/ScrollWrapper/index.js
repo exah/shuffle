@@ -29,14 +29,13 @@ export default class extends Component {
       scrollbars: 'custom',
       click: true,
       tap: true,
-      startX: this.scrollEl.scrollHeight + this.scrollEl.clientHeight,
       preventDefault: IF_TOUCH,
     });
 
     this.refresh(200);
   }
 
-  refresh(timeout: 0, offset: 400) {
+  refresh(timeout = 0, offset = 400) {
     setTimeout(() => {
       this.iscroll.refresh();
 
