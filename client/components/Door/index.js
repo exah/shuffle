@@ -8,7 +8,7 @@ function onClick(e, handler) {
   handler();
 }
 
-class RoomEntrance extends Component {
+class Door extends Component {
   render() {
     const { roomLoading, roomLoaded, room, roomID, dispatch } = this.props;
     if (roomLoaded) {
@@ -54,5 +54,5 @@ export default connect(state => {
     room,
     roomID,
   };
-})(RoomEntrance);
+})(Door);
 

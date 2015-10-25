@@ -9,7 +9,7 @@ import { readState } from './storage';
 import createStorePlus from './store';
 import all from './reducers';
 import App from './components/App';
-import RoomEntrance from './components/RoomEntrance';
+import Door from './components/Door';
 import NotFound from './components/Splashes/NotFound';
 import { updateTopRooms, newMessage, newAttachment,
          joinUser, leaveUser } from 'actions';
@@ -26,7 +26,7 @@ const app = (
   <Provider store={store}>
     <ReduxRouter>
       <Route path="/" component={App}>
-        <Route path="/room/:roomID" component={RoomEntrance}/>
+        <Route path="/room/:roomID" component={Door}/>
         <Route path="*" component={NotFound}/>
       </Route>
     </ReduxRouter>
