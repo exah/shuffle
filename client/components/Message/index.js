@@ -29,7 +29,7 @@ export default class Message extends Component {
           </div>
           <div className="message-content-text" style={messageStyle}>
             <Article text={text} />
-            {attachments.length === 0 ? false :
+            { attachments === undefined || attachments.length === 0 ? false :
               <div className="attachments">
               { attachments.map((atta, index) =>
                 <OpenGraph key={index} meta={atta.meta.data} />) }
