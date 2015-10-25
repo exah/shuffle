@@ -19,6 +19,7 @@ export default ({ label, rooms, dispatch, currentRoom, isJoined }) => (
         <a
           href={`/room/${roomID}`}
           onClick={e => onClick(e, () => dispatch(switchToRoom(history, roomID)))}
+          className="cut-text"
           title={name}>
             {`#${roomID}`}
         </a>

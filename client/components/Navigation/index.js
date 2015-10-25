@@ -25,6 +25,12 @@ class Navigation extends Component {
     return (
       <nav className={navigationClasses}>
         <ScrollWrapper><div className="navigation_wrapper">
+          { topRooms === null || !!topRooms.length ? false :
+            <div className="navigation-message">
+              <p>Hey, you! Create first room</p>
+            </div>
+          }
+
           <div className="navigation-group">
             <input
               onChange={e => dispatch(searchInputChange(e.target.value))}
@@ -62,12 +68,13 @@ class Navigation extends Component {
               label="Joined" />
           }
 
-          {searchResults ? false :
+          {searchResults || topRooms !== null && !topRooms.length ? false :
             <NavigationGroup
               rooms={topRooms}
               dispatch={dispatch}
               label="Top Rooms" />
           }
+
         </div></ScrollWrapper>
       </nav>
     );
