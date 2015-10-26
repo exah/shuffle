@@ -37,11 +37,6 @@ export default {
     }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('style', 'css!postcss'),
-      include: [
-        path.join(root, 'client'),
-        path.join(root, 'common'),
-        path.join(root, 'node_modules'),
-      ],
     }],
   },
   postcss: () => [

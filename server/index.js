@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import express from 'express';
 import http from 'http';
+import compression from 'compression';
 
 import { transform } from 'babel-core';
 transform('code', {
@@ -49,6 +50,7 @@ if (config.hotReload) {
   const historyFallback = require('connect-history-api-fallback');
 
   app.use(historyFallback());
+  app.use(compression());
 
   // --- PROD FILE SERVER
   app.use('/', express.static(__dirname + '/../static'));
