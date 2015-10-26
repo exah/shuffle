@@ -50,7 +50,7 @@ const Navigation = ({
               onChange={e => dispatch(searchInputChange(e.target.value))}
               value={searchText}
               type="text"
-              className="input--underline"
+              className="input--underline longword"
               placeholder="# Find / Create new" />
           </div>
           {!shouldShowCreation ? false :
@@ -58,7 +58,9 @@ const Navigation = ({
               <h4 className="navigation-group-label"> Create Room </h4>
               <ul className="navigation-group-list">
                 <li className="navigation-group-list-item">
-                  <a href={`/room/${searchText}`}
+                  <a
+                    href={`/room/${searchText}`}
+                    className="longword"
                     onClick={e => onClick(e, () =>
                       dispatch(createRoom(history, searchText)))}>
                       {`#${searchText}`}

@@ -150,7 +150,7 @@ p + p {
   color: color(grey);
 }
 
-.cut-text {
+.longword {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap

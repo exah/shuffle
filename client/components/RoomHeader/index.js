@@ -21,13 +21,13 @@ class RoomHeader extends Component {
               <b className="iconNav-line"></b>
             </i>
           </li>
-          <li className="room-header-bar-item">
-            <h4 className="room-name cut-text">{`#${roomName}`}</h4>
+          <li className="room-header-bar-item longword">
+            <h4 className="room-name longword">{`#${roomName}`}</h4>
           </li>
         </ul>
         <ul className="room-header-bar">
           <li className="room-header-bar-item">
-            <h4 className="cut-text">{nick}</h4>
+            <h4 className="longword">{nick}</h4>
           </li>
           <li className="room-header-bar-item">
             <Ava avatar={avatar} color={color} />
