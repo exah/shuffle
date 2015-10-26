@@ -1,4 +1,6 @@
 import marked from 'marked';
+import highlight from 'highlight.js';
+import 'highlight.js/styles/tomorrow.css';
 
 const renderer = new marked.Renderer();
 renderer.link = ( href, title, text ) => {
@@ -21,6 +23,7 @@ const options = {
   sanitize: true,
   breaks: true,
   renderer,
+  highlight: (code) => highlight.highlightAuto(code).value,
 };
 
 export default text => marked(text, options);

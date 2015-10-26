@@ -88,16 +88,22 @@ p + p {
   }
 
   pre {
-    background: color(grey, light);
-    padding: .5em;
     padding-left: 1em;
+
+    padding: .5em;
     border-radius: $radius;
+
+    word-wrap: break-word;
+    word-break: break-word;
+
+    background: whitesmoke;
   }
 
   code {
     display: inline-block;
-    background: color(grey, light);
     padding: .1em .5em .2em;
+
+    background: whitesmoke;
   }
 
   table {
@@ -136,7 +142,7 @@ p + p {
 }
 
 .article + .article {
-  margin-top: 2em;
+  margin-top: 2.1em;
 }
 
 .badge {
