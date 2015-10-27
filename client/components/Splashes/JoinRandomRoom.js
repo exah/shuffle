@@ -8,6 +8,7 @@ const JoinRandomRoom = ({ rooms, dispatch }) => (
 	    <p><i className="icon iconShuffle"></i></p>
 	    <p>
 	      <button
+	      	type="button"
 	        onClick={() => dispatch(switchToRoom(null))}
 	        className="btn btn--outline">
 	          Join random room

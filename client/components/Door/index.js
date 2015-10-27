@@ -1,12 +1,8 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { joinRoom } from '../../smartActions';
+import { handleEvents } from '../../utils';
 import Room from '../Room';
-
-function onClick(e, handler) {
-  e.preventDefault();
-  handler();
-}
 
 const Door = ({ roomLoading, roomLoaded, room, roomID, dispatch }) => {
   if (roomLoaded) {
@@ -30,7 +26,7 @@ const Door = ({ roomLoading, roomLoaded, room, roomID, dispatch }) => {
         <h1>You have left this room.</h1>
         <p className="faded">
           <span className="btn btn--outline"
-              onClick={e => onClick(e, () =>
+              onClick={e => handleEvents(e, () =>
                 dispatch(joinRoom({ roomID })))}
               title={name}>
               Rejoin #{roomID}

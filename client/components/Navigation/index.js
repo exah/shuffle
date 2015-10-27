@@ -3,13 +3,9 @@ import React from 'react';
 import { createRoom, searchInputChange } from '../../smartActions';
 import ScrollWrapper from '../ScrollWrapper';
 import NavigationGroup from './NavigationGroup';
+import { handleEvents } from '../../utils';
 import './index.css';
 import _ from 'lodash';
-
-function onClick(e, handler) {
-  e.preventDefault();
-  handler();
-}
 
 const Navigation = ({
   dispatch, collapsed, routerRoomID: currentRoom, joinedRooms,
@@ -61,7 +57,7 @@ const Navigation = ({
                   <a
                     href={`/room/${searchText}`}
                     className="longword"
-                    onClick={e => onClick(e, () =>
+                    onClick={e => handleEvents(e, () =>
                       dispatch(createRoom(history, searchText)))}>
                       {`#${searchText}`}
                   </a>

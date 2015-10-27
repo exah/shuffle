@@ -2,17 +2,12 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { sendMessage } from '../../smartActions';
 import { roomInputChange } from '../../actions';
+import { handleEvents } from '../../utils';
 
 function onKeyPress(e, handler) {
   if (e.which === 13 && !e.shiftKey) {
-    e.preventDefault();
-    handler();
+    handleEvents(e, handler);
   }
-}
-
-function onClick(e, handler) {
-  e.preventDefault();
-  handler();
 }
 
 class RoomInput extends Component {
@@ -26,7 +21,7 @@ class RoomInput extends Component {
     const { dispatch, text, buttonEnabled } = this.props;
     return (
       <form className="room-actions"
-        onSubmit={e => onClick(e, () => dispatch(sendMessage()))}>
+        onSubmit={e => handleEvents(e, () => dispatch(sendMessage()))}>
         <textarea
           type="text"
           ref="textarea"

@@ -1,10 +1,6 @@
 import React from 'react';
 import { switchToRoom, leaveRoom } from '../../smartActions';
-
-function onClick(e, handler) {
-  e.preventDefault();
-  handler();
-}
+import { handleEvents } from '../../utils';
 
 export default ({ label, rooms, dispatch, currentRoom, isJoined }) => (
   <div className="navigation-group">
@@ -18,7 +14,7 @@ export default ({ label, rooms, dispatch, currentRoom, isJoined }) => (
 
         <a
           href={`/room/${roomID}`}
-          onClick={e => onClick(e, () => dispatch(switchToRoom(history, roomID)))}
+          onClick={e => handleEvents(e, () => dispatch(switchToRoom(history, roomID)))}
           className="longword"
           title={name}>
             {`#${roomID}`}
@@ -26,6 +22,7 @@ export default ({ label, rooms, dispatch, currentRoom, isJoined }) => (
 
         { isJoined ?
           (<button
+            type="button"
             className="reset-input"
             onClick={() => dispatch(leaveRoom(history, roomID))}>
               x
