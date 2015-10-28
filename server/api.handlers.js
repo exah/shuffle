@@ -19,7 +19,7 @@ const createRoom = request => () => actions.createRoom(request)
 const joinRoom = request => () => actions.joinRoom(request)
   .then(({room, identity}) => {
     const { roomID } = room;
-    const { userID, nick, avatar, color } = identity;
+    const { userID, nick, avatar, color, active } = identity;
     const channel = `room:${room.roomID}`;
 
     return [{
@@ -41,6 +41,7 @@ const joinRoom = request => () => actions.joinRoom(request)
         nick,
         avatar,
         color,
+        active,
       },
     },
     topRooms(),

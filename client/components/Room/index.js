@@ -18,10 +18,11 @@ class Room extends Component {
       const { text, time, userID,
               status, attachments } = roomMessages[messageID];
       const user = roomUsers[userID];
-      const { nick, avatar } = user ? user : {
-        nick: 'Leaved user',
-        avatar: '',
+      const { nick, avatar, active } = user ? user : {
+        nick: nick,
+        avatar: avatar,
         color: '',
+        active: false,
       };
       const color =  user && user.color ? roomUsers[userID].color : '';
       const isOurMessage = (ourUserID === userID);
@@ -34,6 +35,7 @@ class Room extends Component {
         avatar,
         status,
         color,
+        active,
         attachments,
       };
     });

@@ -23,11 +23,15 @@ function joinUser(room, action) {
 function leaveUser(room, action) {
   const {userID} = action;
   const users = room.roomUsers;
-  const newUsers = Object.assign({}, users);
-  delete newUsers[userID];
+  const user = users[userID];
   return {
     ...room,
-    roomUsers: newUsers,
+    roomUsers: {
+      ...users,
+      userID: Object.assign(user, {
+        active: false,
+      }),
+    },
   };
 }
 
@@ -188,7 +192,7 @@ function joinedRooms(state = {}, action) {
     }
     case actions.LEAVE_ROOM: {
       const { roomID } = action;
-      const newState = Object.assign({}, state);
+      const newState = Object.assign(state);
       delete newState[roomID];
       return newState;
     }
@@ -198,13 +202,14 @@ function joinedRooms(state = {}, action) {
       const { userID, secret } = identity;
       const roomName = room.name;
       const roomUsers = room.users
-        .reduce( (result, {userID: key, avatar, nick, color} ) => {
+        .reduce( (result, {userID: key, avatar, nick, color, active} ) => {
           return {
             ...result,
             [key]: {
               avatar,
               nick,
               color,
+              active,
             },
           };
         }, {});

@@ -70,7 +70,7 @@
     }
   }
 
-  &--rejected, &--sent {
+  &--rejected, &--sent, &--leaved {
     opacity: .5;
 
     &:hover {

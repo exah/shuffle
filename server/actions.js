@@ -47,6 +47,7 @@ function _createUser({room}) {
           avatar: generatedAvatar,
           nick: generatedUser.name,
           color: generatedUser.color,
+          active: true,
         });
 
         room.users.push(user);
@@ -85,20 +86,51 @@ function _getUser({room, userID}) {
  * @param  {String} options.secret - user secret
  * @return {Promise}
  */
-function _deleteUser({room, userID, secret}) {
+// function _deleteUser({room, userID, secret}) {
+//   return new Promise((resolve, reject) => {
+//     if (room.rating <= 1) {
+//       Room.remove({roomID: room.roomID}, err => {
+//         if (err) {
+//           return reject(err);
+//         }
+//         resolve({roomID: room.roomID, userID});
+//       });
+//     } else {
+//       room.update({$pull: {users: {userID, secret}}, $inc: {rating: -1} }, (err) => {
+//         if (err) {
+//           return reject(err);
+//         }
+//         resolve({roomID: room.roomID, userID});
+//       });
+//     }
+//   });
+// }
+
+/**
+ * Retun promise that chancge user status in room (active to false) and resolve with hash with user data
+ * @param  {Room} options.room     - Room instance
+ * @param  {String} options.userID - user identifier
+ * @return {Promise}
+ */
+function _disableUser({room, userID}) {
   return new Promise((resolve, reject) => {
+    const { roomID } = room;
+
     if (room.rating <= 1) {
-      Room.remove({roomID: room.roomID}, err => {
+      Room.remove({roomID: roomID}, err => {
         if (err) {
           return reject(err);
         }
         resolve({roomID: room.roomID, userID});
       });
     } else {
-      room.update({$pull: {users: {userID, secret}}, $inc: {rating: -1} }, (err) => {
+      Room.update(
+        { roomID: roomID, 'users.userID': userID },
+        { $set: { 'users.$.active': false }, $inc: {rating: -1} }, (err) => {
         if (err) {
           return reject(err);
         }
+
         resolve({roomID: room.roomID, userID});
       });
     }
@@ -230,7 +262,7 @@ export function joinRoom({roomID, userID, secret}) {
 export function leaveRoom({roomID, userID, secret}) {
   return _getRoom(roomID)
     .then((room) => {
-      return _deleteUser({room, userID, secret});
+      return _disableUser({room, userID, secret});
     });
 }
 
@@ -267,7 +299,8 @@ export function getTop() {
           return reject(err);
         }
         resolve({rooms: rooms.map( ({roomID, name, rating, users}) => {
-          return {roomID, name, rating, users: users.length};
+          const activeUsers = users.filter((user) => user.active ? user : false );
+          return {roomID, name, rating, users: activeUsers.length};
         }),
         });
       });
