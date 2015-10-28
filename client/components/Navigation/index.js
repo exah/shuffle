@@ -68,14 +68,12 @@ const Navigation = ({
           {!searchResults || !searchResults.length ? false :
             <NavigationGroup
               rooms={searchResults}
-              dispatch={dispatch}
               history={history}
               label="Search Results" />
           }
           { _.isEmpty(userRooms) || searchResults ? false :
             <NavigationGroup
               rooms={userRooms}
-              dispatch={dispatch}
               history={history}
               isJoined="true"
               currentRoom={currentRoom}
@@ -85,7 +83,6 @@ const Navigation = ({
           {searchResults || topRooms !== null && !topRooms.length ? false :
             <NavigationGroup
               rooms={topRooms}
-              dispatch={dispatch}
               history={history}
               label="Top Rooms" />
           }

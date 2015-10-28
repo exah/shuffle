@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { switchToRoom, leaveRoom } from '../../smartActions';
 import { handleEvents } from '../../utils';
 
-export default ({ label, rooms, dispatch, currentRoom, isJoined }) => (
+const NavigationGroup = ({ label, rooms, dispatch, currentRoom, isJoined }) => (
   <div className="navigation-group">
     <h4 className="navigation-group-label"> { label } </h4>
     <ul className="navigation-group-list">
@@ -34,3 +35,5 @@ export default ({ label, rooms, dispatch, currentRoom, isJoined }) => (
     </ul>
   </div>
 );
+
+export default connect()(NavigationGroup);
