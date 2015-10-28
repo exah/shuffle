@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   avatar: { type: String, required: true },
   nick: { type: String, required: true },
   color: { type: String, required: false },
+  active: { type: Boolean, required: true },
 });
 
 const User = mongoose.model('User', userSchema);
