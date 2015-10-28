@@ -25,7 +25,7 @@ export default class Message extends Component {
         <ul className="message-meta">
           <li className="message-meta-item">
             {nick}
-            {!active ? ' (leaved)' : ''}
+            {!active && status !== 'preview' ? ' (leaved)' : ''}
           </li>
           <li className="message-meta-item message-meta-status">
             {finalTime}
