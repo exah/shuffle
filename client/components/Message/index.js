@@ -6,19 +6,27 @@ import Ava from '../Ava';
 
 export default class Message extends Component {
   render() {
-    const { attachments, time, nick, avatar, text, status, color, isOurMessage } = this.props.message;
+    const { attachments, time, nick, avatar, text, status, color, isOurMessage, active } = this.props.message;
     const date = new Date(time);
     const hours = ('00' + String(date.getHours())).slice(-2);
     const minutes = ('00' + String(date.getMinutes())).slice(-2);
     const humanTime = `${hours}:${minutes}`;
     const finalTime = status === 'confirmed' ? humanTime : `${ status }`;
-    const ourMessageClass = isOurMessage ? 'message--myself' : '';
     const messageStyle = isOurMessage ? { color: color } : {};
+    const messageClasses = [
+      'message',
+      `message--${ status }`,
+      isOurMessage ? 'message--myself' : '',
+      active ? 'message--active' : 'message--leaved',
+    ].join(' ');
 
     return (
-      <li className={`message message--${ status } ${ ourMessageClass }`}>
+      <li className={messageClasses}>
         <ul className="message-meta">
-          <li className="message-meta-item">{nick}</li>
+          <li className="message-meta-item">
+            {nick}
+            {!active ? ' (leaved)' : ''}
+          </li>
           <li className="message-meta-item message-meta-status">
             {finalTime}
           </li>
